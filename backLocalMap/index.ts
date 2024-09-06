@@ -23,3 +23,21 @@ const Port = 3000;
 app.listen(Port, () => {
   console.log(`Rodando na port ${Port}`);
 });
+
+/**
+ * Install:
+ *    yarn init
+ *    yarn add express typeorm sqlite3 reflect-metadata
+ *    yarn add cors
+ *    yarn add ts-node-dev --dev          - para criar um script de inicialização "dev": "tsnd --respawn index.ts"
+ *    yarn add typescript --dev           - add TS
+ *    yarn tsc --init                     - ininciar o ts
+ * 
+ * 
+ *    types: 
+ *    yarn add @types/express --dev
+ *    yarn add @types/cors --dev
+ *
+ *    npx typeorm init --name localmap --database sqlite
+ */
+   
