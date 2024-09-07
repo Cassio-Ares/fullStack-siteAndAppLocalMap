@@ -3,6 +3,7 @@ import { AppDataSource } from "./src/data-source";
 import express from "express";
 import cors from "cors";
 import { routerCompany } from "./src/router/PartherCompany.routes";
+import { routesUser } from "./src/router/User.routes";
 
 AppDataSource.initialize()
   .then(async () => {
@@ -19,7 +20,8 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/", routerCompany);// tst
+app.use("/", routerCompany);
+app.use("/", routesUser)
 
 const Port = 3000;
 
