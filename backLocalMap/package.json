@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "tsnd --respawn index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

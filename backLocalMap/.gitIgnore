@@ -1,3 +1,4 @@
 *_lock.json
 node_modules
 database.sqlite
+build
