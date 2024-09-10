@@ -3,7 +3,7 @@ export default {
   COLORS: {
     primary: "#322153",
     secondary: "#6c63ff",
-    background: "#f0f0f5",
+    background: "#dfe6df",
     text: "#6c6c80",
     white: "#fefefe",
   },
@@ -17,9 +17,9 @@ export default {
   FONT_SIZE: {
     XS: 12,
     SM: 14,
-    MD: 16,
-    LG: 18,
-    XL: 20,
-    XXL: 24,
+    MD: 20,
+    LG: 24,
+    XL: 30,
+    XXL: 54,
   },
 };
