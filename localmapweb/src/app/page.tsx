@@ -1,0 +1,16 @@
+'use client'
+import styles from "./page.module.css";
+
+export default function Home() {
+  return (
+    <div className={styles.page}>
+     
+    </div>
+  );
+}
+
+/**
+ *  * yarn add leaflet react-leaflet react-toastify styled-components
+ * 
+ *  * yarn add @types/styled-components --dev
+ */
