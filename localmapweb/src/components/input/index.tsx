@@ -1,7 +1,23 @@
-import React from 'react'
+'use client'
+import {Container, InputStyled, Label} from './styles'
 
-export const Input = () => {
+interface InputProps{
+  label: string;
+  name:string;
+  value:string;
+  onChange:Function;
+}
+
+export const Input = ({label, name, value, onChange}:InputProps) => {
   return (
-    <div>index</div>
+    <Container>
+      <Label>{label}</Label>
+      <InputStyled
+      required
+       name={name}
+       value={value}
+       onChange={(e)=>{onChange((previusState:any)=> ({...previusState, [name]: e.target.value}))}}
+      />
+    </Container>
   )
 }

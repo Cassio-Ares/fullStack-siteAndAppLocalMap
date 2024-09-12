@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.main`
   background: url("./home-background.svg") no-repeat 700px bottom;
   background-color: ${({ theme }) => theme.COLORS.background};
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +27,7 @@ export const FormTitle = styled.h2`
   padding-bottom: 30px;
 `;
 
-export const Selection = styled.p`
+export const Section = styled.p`
   color: ${({ theme }) => theme.COLORS.primary};
   font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
   padding-bottom: 30px;
@@ -42,7 +41,41 @@ export const CategoryContainer = styled.div`
   justify-content: center;
 `;
 
-export const CategoryBox = styled.div``;
+// export const CategoryBox = styled.div<{ isActive: boolean }>`
+//   background-color: ${(props) =>
+//     props.isActive ? props.theme.white : props.theme.background};
+
+//   border: ${(props) =>
+//     props.isActive ? `2px solid ${props.theme.background}` : "none"};
+
+//   border-radius: 8px;
+//   width: 160px;
+//   height: 160px;
+
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+
+//   margin: 10px;
+
+//   cursor: pointer;
+// `;
+
+export const CategoryBox = styled.div`
+  background: ${({theme})=> theme.COLORS.background};
+  border-radius: 8px;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px;
+
+  cursor: pointer;
+`;
 
 export const CategoryImage = styled.img`
   width: 40px;
