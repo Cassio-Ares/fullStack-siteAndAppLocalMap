@@ -10,12 +10,13 @@ export const Container = styled.main`
 `;
 
 export const Form = styled.form`
-  width: 40vw;
+  width: 50vw;
   background-color: ${({ theme }) => theme.COLORS.white};
   padding: 50px;
   margin-top: 40px;
   border-radius: 8px;
-
+  box-shadow: 10px 10px 50px #333,  
+  -10px -10px 50px #333;
   @media (max-width: 1024px) {
     width: 70vw;
   }
@@ -35,53 +36,6 @@ export const Section = styled.p`
   font-weight: 700;
 `;
 
-export const CategoryContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-// export const CategoryBox = styled.div<{ isActive: boolean }>`
-//   background-color: ${(props) =>
-//     props.isActive ? props.theme.white : props.theme.background};
-
-//   border: ${(props) =>
-//     props.isActive ? `2px solid ${props.theme.background}` : "none"};
-
-//   border-radius: 8px;
-//   width: 160px;
-//   height: 160px;
-
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-
-//   margin: 10px;
-
-//   cursor: pointer;
-// `;
-
-export const CategoryBox = styled.div`
-  background: ${({theme})=> theme.COLORS.background};
-  border-radius: 8px;
-  width: 160px;
-  height: 160px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  margin: 10px;
-
-  cursor: pointer;
-`;
-
-export const CategoryImage = styled.img`
-  width: 40px;
-  height: 40px;
-`;
-
 export const ButtonContainer = styled.div`
   text-align: center;
   padding-top: 20px;
@@ -90,7 +44,8 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   background: ${({theme})=> theme.COLORS.primary};
   color: ${({theme}) => theme.COLORS.white };
-  height: 50px;
+  padding: 10px 40px;
+  margin-top:40px;
   border: none;
   border-radius: 5px;
 

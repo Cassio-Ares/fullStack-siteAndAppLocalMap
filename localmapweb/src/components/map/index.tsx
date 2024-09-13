@@ -5,10 +5,6 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Importar CSS do Leaflet
 import L from 'leaflet';
 
-// Importar os ícones manualmente
-// import iconUrl from 'leaflet/dist/images/marker-icon.png';
-// import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-// import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 // Substituindo o ícone padrão do Leaflet
 const DefaultIcon = L.icon({
@@ -21,11 +17,16 @@ const DefaultIcon = L.icon({
   shadowSize: [41, 41]
 });
 
+interface Loc{
+  lat:number | null,
+  long:number | null,
+}
+
 L.Marker.prototype.options.icon = DefaultIcon;
-export const Map = () => {
+export const Map = ({lat, long}:Loc) => {
   return (
     <MapContainer
-      center={[51.505, -0.09] as LatLngExpression}
+      center={[lat, long] as LatLngExpression}
       zoom={13}
       style={{ height: '100vh', width: '100%' }}
     >
@@ -33,7 +34,7 @@ export const Map = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[51.505, -0.09] as LatLngExpression}>
+      <Marker position={[lat, long] as LatLngExpression}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
@@ -43,23 +44,12 @@ export const Map = () => {
 };
 
 
-// import { MapContainer, Marker,TileLayer } from 'react-leaflet';
-// import { LatLngExpression } from 'leaflet';
-
-// export const Map = () => {
-//   return (
-//     <MapContainer
-//       center={{ lat: 12, lng: 23 } as LatLngExpression}
-//       zoom={13}
-//       // whenCreated={}
-//     >
-//       <TileLayer
-//         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//       />
-//       <Marker position={[12, 23] as LatLngExpression}/>
-//     </MapContainer>
-//   );
-// }
-
+/**
+ * whenCreated ={(map)=>{
+ *  setFormValues((prev)=>({
+ *   ...prev,
+ *   coords:[event.latlng.lat, event.latlng.lng]
+ * }))
+ * }}
+ */
 

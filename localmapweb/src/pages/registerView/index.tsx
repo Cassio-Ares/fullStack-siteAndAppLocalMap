@@ -1,12 +1,13 @@
 'use client'
 import { Input } from '@/components/input'
-import { Container, Section, Form, FormTitle, CategoryContainer, CategoryBox, CategoryImage, ButtonContainer, Button } from './styles'
-import { useState } from 'react'
-import { categories } from './categories';
-
+import { Container, Section, Form, FormTitle, ButtonContainer, Button } from './styles'
+import { useEffect, useState } from 'react'
+import  useGeoLocation  from '@/hooks/useGetLocation'
+import { toast } from 'react-toastify';
 
 
 import dynamic from 'next/dynamic';
+
 const MapContainerClientSide = dynamic(() => import('@/components/map').then(mod => mod.Map), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -14,6 +15,9 @@ const MapContainerClientSide = dynamic(() => import('@/components/map').then(mod
 
 
 export const RegisterPage = () => {
+   // Inicializa com as coordenadas obtidas por useGeoLocation
+   const { coords } = useGeoLocation();
+
   const [formValues, setFormValues] = useState({
     companyName: "",
     personResponibleFirstName: "",
@@ -27,10 +31,41 @@ export const RegisterPage = () => {
     longitude: "",
   })
 
-  console.log(formValues)
+
+ if(!coords){
+  return <h2>Obtendo localização ...</h2>
+ }
+
+
+ async function onSubmit(){
+   const request = await fetch('https://localhost:3000/store', {
+    method:'POST', 
+    headers:{
+      "Content-Type":"application/json"
+    }, 
+    body: JSON.stringify({
+      ...formValues,  
+    })
+   })
+
+   if(request.ok){
+       toast("Estabelecimento gravado com sucesso", {
+        type: "success", 
+        autoClose: 2000,
+        onClose:()=>{
+          // criar uma função para voltar para home
+           //history.push('/')
+        }
+       })
+   }
+ }
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={(e)=>{
+        e.preventDefault();
+        onSubmit()
+      }}>
         <FormTitle>
           Cadastre sua empresa
         </FormTitle>
@@ -91,28 +126,16 @@ export const RegisterPage = () => {
           value={formValues.latitude}
           onChange={setFormValues}
         />
-        <Input
+        <Input  
           label='Longitude'
           name='longitude'
           value={formValues.longitude}
           onChange={setFormValues}
         />
         <Section>Endereço</Section>
-        <MapContainerClientSide />
-
-        <CategoryContainer>
-          {categories?.map((category) => (
-            <>
-              <CategoryBox
-                key={category.key}
-                onClick={() => { setFormValues(previusState => ({ ...previusState, category: category.key })) }}
-              //  isActive = {formValues.category === category.key}      
-              />
-              <CategoryImage src={category.url} />
-              {category.label}
-            </>
-          ))}
-        </CategoryContainer>
+        {/* <Map lat={coords[0]} long={coords[1]}/> */}
+      
+        < MapContainerClientSide lat={coords[0]} long={coords[1]}  />
         <ButtonContainer>
           <Button type='submit'>Salvar</Button>
         </ButtonContainer>

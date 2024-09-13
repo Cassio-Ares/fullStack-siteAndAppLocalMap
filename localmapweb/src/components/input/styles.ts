@@ -15,7 +15,7 @@ export const InputStyled = styled.input`
  background: ${({theme})=> theme.COLORS.background};
  color: ${({theme})=> theme.COLORS.text};
  border-radius: 8px;
- height: 28px;
+ height: 30px;
  font-size: ${({theme})=> theme.FONT_SIZE.LG}px;
  padding: 10px;
 `;
