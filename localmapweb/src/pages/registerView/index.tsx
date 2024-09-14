@@ -2,21 +2,25 @@
 import { Input } from '@/components/input'
 import { Container, Section, Form, FormTitle, ButtonContainer, Button } from './styles'
 import { useEffect, useState } from 'react'
-import  useGeoLocation  from '@/hooks/useGetLocation'
+import useGeoLocation from '@/hooks/useGetLocation'
 import { toast } from 'react-toastify';
 
-
 import dynamic from 'next/dynamic';
+import { Map } from '@/components/map'
+import { useRouter } from 'next/navigation'
 
-const MapContainerClientSide = dynamic(() => import('@/components/map').then(mod => mod.Map), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
+
+// const MapContainerClientSide = dynamic(() => import('@/components/map').then(mod => mod.Map), {
+//   ssr: false,
+//   loading: () => <p>Loading...</p>,
+// });
 
 
 export const RegisterPage = () => {
-   // Inicializa com as coordenadas obtidas por useGeoLocation
-   const { coords } = useGeoLocation();
+  // Inicializa com as coordenadas obtidas por useGeoLocation
+  const { coords } = useGeoLocation();
+  const router = useRouter()
+
 
   const [formValues, setFormValues] = useState({
     companyName: "",
@@ -32,37 +36,42 @@ export const RegisterPage = () => {
   })
 
 
- if(!coords){
-  return <h2>Obtendo localização ...</h2>
- }
+  if (!coords) {
+    return <h2>Obtendo localização ...</h2>
+  }
 
+  
 
- async function onSubmit(){
-   const request = await fetch('https://localhost:3000/store', {
-    method:'POST', 
-    headers:{
-      "Content-Type":"application/json"
-    }, 
-    body: JSON.stringify({
-      ...formValues,  
-    })
-   })
+  async function onSubmit() {
+    const request = await fetch('http://localhost:3000/partherCompany', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ...formValues,
+      })
+    });
 
-   if(request.ok){
-       toast("Estabelecimento gravado com sucesso", {
-        type: "success", 
-        autoClose: 2000,
-        onClose:()=>{
-          // criar uma função para voltar para home
-           //history.push('/')
+    if (request.ok) {
+      toast("Estabelecimento gravado com sucesso", {
+        type: "success",
+        autoClose: 3000,
+        onClose: () => {
+          router.push('/');
         }
-       })
-   }
- }
+      });
+    } else {
+      toast("Erro ao gravar estabelecimento", {
+        type: "error",
+        autoClose: 3000
+      });
+    }
+  }
 
-  return (
+ return (
     <Container>
-      <Form onSubmit={(e)=>{
+      <Form onSubmit={(e) => {
         e.preventDefault();
         onSubmit()
       }}>
@@ -80,7 +89,7 @@ export const RegisterPage = () => {
         />
         <Input
           label='Primeiro nome do responsável'
-          name=' personResponibleFirstName'
+          name='personResponibleFirstName'
           value={formValues.personResponibleFirstName}
           onChange={setFormValues}
         />
@@ -126,7 +135,7 @@ export const RegisterPage = () => {
           value={formValues.latitude}
           onChange={setFormValues}
         />
-        <Input  
+        <Input
           label='Longitude'
           name='longitude'
           value={formValues.longitude}
@@ -134,12 +143,12 @@ export const RegisterPage = () => {
         />
         <Section>Endereço</Section>
         {/* <Map lat={coords[0]} long={coords[1]}/> */}
-      
-        < MapContainerClientSide lat={coords[0]} long={coords[1]}  />
+
+           < Map lat={coords[0]} long={coords[1]} /> 
         <ButtonContainer>
           <Button type='submit'>Salvar</Button>
         </ButtonContainer>
       </Form>
     </Container>
-  )  
+  )
 }
