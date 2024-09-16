@@ -1,5 +1,5 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text } from 'react-native';
 import { IMarker } from '../Home';
 import { useEffect, useState } from 'react';
 
@@ -25,12 +25,17 @@ export default function Details() {
     });
   }, []);
 
-  console.log(params.companyName)
-
+ 
   return (
     <SafeAreaView style={styles.detailsContainer}>
+
       <Text style={styles.section}>Descrição</Text>
       <Text style={styles.text}>{params.description}</Text>
+
+      <Image 
+        style={styles.img}
+        source={require('../../assets/media/placeholder.jpg')}
+      />
 
       <Text style={styles.section}>Telefone</Text>
       <Text style={styles.text}>{params.phone}</Text>
@@ -38,11 +43,11 @@ export default function Details() {
       <Text style={styles.section}>E-mail</Text>
       <Text style={styles.text}>{params.email}</Text>
 
-      <Text style={styles.title}>Endereço</Text>
+      <Text style={styles.section}>Endereço</Text>
       <Text style={styles.text}>{address?.address.road}</Text>
       <Text style={styles.text}>{address?.address.city}</Text>
       <Text style={styles.text}>{address?.address.postCode}</Text>
-      <Text style={styles.text}>{address?.address.state}</Text>S
+      <Text style={styles.text}>{address?.address.state}</Text> 
     </SafeAreaView>
   )
 }
@@ -64,14 +69,19 @@ const styles = StyleSheet.create({
     color: '#6c6c80'
   },
   section: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "400",
     color: '#322153',
     paddingTop: 20
   },
   text: {
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: "400",
     color: '#6c6c80'
+  },
+  img:{
+    width:350,
+    height:300,
+    marginTop:15
   }
 })
