@@ -29,7 +29,6 @@ export default function Details() {
 
   return (
     <SafeAreaView style={styles.detailsContainer}>
-
       <Text style={styles.section}>Descrição</Text>
       <Text style={styles.text}>{params.description}</Text>
 
